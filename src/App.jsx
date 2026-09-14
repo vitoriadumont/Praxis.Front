@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 import RotaProtegida from "./routes/RotaProtegida";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Alunos from "./pages/Alunos";
 
 function App() {
   return (
@@ -15,6 +16,14 @@ function App() {
             element={
               <RotaProtegida>
                 <Dashboard />
+              </RotaProtegida>
+            }
+          />
+          <Route
+            path="/alunos"
+            element={
+              <RotaProtegida>
+                <Alunos />
               </RotaProtegida>
             }
           />
