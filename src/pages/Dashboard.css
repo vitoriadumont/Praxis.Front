@@ -1,0 +1,26 @@
+.dashboard-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.dashboard-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  flex: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card-numero {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.dashboard-card-label {
+  font-size: 13px;
+  color: var(--cor-texto-claro);
+  margin-top: 4px;
+}
