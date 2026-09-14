@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background-color: white;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.header-titulo {
+  margin: 0;
+  font-size: 18px;
+  color: var(--cor-texto);
+}
+
+.header-subtitulo {
+  margin: 0;
+  font-size: 13px;
+  color: var(--cor-texto-claro);
+}
+
+.header-usuario {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--cor-texto);
+}
+
+.header-usuario button {
+  background: none;
+  border: none;
+  color: var(--cor-primaria);
+  cursor: pointer;
+  font-size: 14px;
+}

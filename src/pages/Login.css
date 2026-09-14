@@ -58,6 +58,7 @@
   background-color: var(--cor-fundo);
   font-size: 14px;
   box-sizing: border-box;
+  color: var(--cor-texto);
 }
 
 .login-card input:focus {
