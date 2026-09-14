@@ -4,6 +4,7 @@ import RotaProtegida from "./routes/RotaProtegida";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Alunos from "./pages/Alunos";
+import AlunoForm from "./pages/AlunoForm";
 
 function App() {
   return (
@@ -24,6 +25,22 @@ function App() {
             element={
               <RotaProtegida>
                 <Alunos />
+              </RotaProtegida>
+            }
+          />
+          <Route
+            path="/alunos/novo"
+            element={
+              <RotaProtegida>
+                <AlunoForm />
+              </RotaProtegida>
+            }
+          />
+          <Route
+            path="/alunos/:id/editar"
+            element={
+              <RotaProtegida>
+                <AlunoForm />
               </RotaProtegida>
             }
           />

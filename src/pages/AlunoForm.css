@@ -1,0 +1,67 @@
+.aluno-form {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 480px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.aluno-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--cor-texto-claro);
+  margin-bottom: 6px;
+}
+
+.aluno-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--cor-texto);
+  box-sizing: border-box;
+}
+
+.aluno-form input:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+}
+
+.aluno-form-erro {
+  color: var(--cor-erro);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.aluno-form-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.aluno-form-botoes button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.aluno-form-botoes button[type="submit"] {
+  background-color: var(--cor-sidebar);
+  color: white;
+}
+
+.aluno-form-botoes button[type="submit"]:hover {
+  background-color: var(--cor-primaria-escura);
+}
+
+.aluno-form-botoes button.cancelar {
+  background-color: #F3F4F6;
+  color: var(--cor-texto);
+}
