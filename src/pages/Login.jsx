@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import "./Login.css";
+import { GraduationCap } from "lucide-react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -29,32 +31,32 @@ export default function Login() {
   }
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <form onSubmit={handleSubmit} style={{ width: 320 }}>
-        <h1>PRÁXIS</h1>
-        <p>Sistema de Gestão Educacional</p>
+    <div className="login-container">
+    <div className="login-logo">
+  <GraduationCap color="white" size={28} />
+    </div>
+      <h1 className="login-titulo">PRÁXIS</h1>
+      <p className="login-subtitulo">Sistema de Gestão Educacional</p>
 
-        <div>
-          <label>E-mail institucional</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      <form className="login-card" onSubmit={handleSubmit}>
+        <label>E-mail institucional</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="coordenacao@instituicao.edu.br"
+          required
+        />
 
-        <div>
-          <label>Senha</label>
-          <input
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-          />
-        </div>
+        <label>Senha</label>
+        <input
+          type="password"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          required
+        />
 
-        {erro && <p style={{ color: "red" }}>{erro}</p>}
+        {erro && <p className="login-erro">{erro}</p>}
 
         <button type="submit" disabled={carregando}>
           {carregando ? "Entrando..." : "Entrar"}
