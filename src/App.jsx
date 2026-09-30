@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Alunos from "./pages/Alunos";
 import AlunoForm from "./pages/AlunoForm";
+import Professores from "./pages/Professores";
+import Disciplinas from "./pages/Disciplinas";
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
             }
           />
           <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="/professores" element={<RotaProtegida><Professores /></RotaProtegida>} />
+          <Route path="/disciplinas" element={<RotaProtegida><Disciplinas /></RotaProtegida>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
