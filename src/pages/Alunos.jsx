@@ -42,7 +42,7 @@ export default function Alunos() {
   );
 
   return (
-    <Layout titulo="Alunos" subtitulo="2024 — Semestre 1">
+    <Layout titulo="Alunos" subtitulo="2026 — Semestre 2">
       <div className="alunos-topo">
         <input
           className="alunos-busca"

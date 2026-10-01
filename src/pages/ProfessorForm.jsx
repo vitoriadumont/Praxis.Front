@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import { buscarAluno, criarAluno, atualizarAluno } from "../services/alunoService";
+import { buscarProfessor, criarProfessor, atualizarProfessor } from "../services/professorService";
 import "./AlunoForm.css";
 
-export default function AlunoForm() {
+export default function ProfessorForm() {
   const { id } = useParams();
   const editando = Boolean(id);
   const navigate = useNavigate();
 
   const [nome, setNome] = useState("");
-  const [matricula, setMatricula] = useState("");
-  const [curso, setCurso] = useState("");
+  const [email, setEmail] = useState("");
+  const [departamento, setDepartamento] = useState("");
   const [erro, setErro] = useState("");
   const [salvando, setSalvando] = useState(false);
 
   useEffect(() => {
     if (editando) {
-      buscarAluno(id).then((aluno) => {
-        setNome(aluno.nome);
-        setMatricula(aluno.matricula);
-        setCurso(aluno.curso);
+      buscarProfessor(id).then((p) => {
+        setNome(p.nome);
+        setEmail(p.email);
+        setDepartamento(p.departamento);
       });
     }
   }, [id]);
@@ -30,41 +30,38 @@ export default function AlunoForm() {
     setErro("");
     setSalvando(true);
 
-    const dados = { nome, matricula, curso };
+    const dados = { nome, email, departamento };
 
     try {
       if (editando) {
-        await atualizarAluno(id, dados);
+        await atualizarProfessor(id, dados);
       } else {
-        await criarAluno(dados);
+        await criarProfessor(dados);
       }
-      navigate("/alunos");
+      navigate("/professores");
     } catch (err) {
-      setErro("Erro ao salvar aluno. Confira os dados e tente novamente.");
+      setErro("Erro ao salvar professor. Confira os dados e tente novamente.");
     } finally {
       setSalvando(false);
     }
   }
 
   return (
-    <Layout
-      titulo={editando ? "Editar Aluno" : "Novo Aluno"}
-      subtitulo="2026 — Semestre 2"
-    >
+    <Layout titulo={editando ? "Editar Professor" : "Novo Professor"} subtitulo="2026 — Semestre 2">
       <form className="aluno-form" onSubmit={handleSubmit}>
         <label>Nome</label>
         <input value={nome} onChange={(e) => setNome(e.target.value)} required />
 
-        <label>Matrícula</label>
-        <input value={matricula} onChange={(e) => setMatricula(e.target.value)} required />
+        <label>E-mail</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-        <label>Curso</label>
-        <input value={curso} onChange={(e) => setCurso(e.target.value)} required />
+        <label>Departamento</label>
+        <input value={departamento} onChange={(e) => setDepartamento(e.target.value)} required />
 
         {erro && <p className="aluno-form-erro">{erro}</p>}
 
         <div className="aluno-form-botoes">
-          <button type="button" className="cancelar" onClick={() => navigate("/alunos")}>
+          <button type="button" className="cancelar" onClick={() => navigate("/professores")}>
             Cancelar
           </button>
           <button type="submit" disabled={salvando}>

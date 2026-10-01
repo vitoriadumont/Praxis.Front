@@ -1,18 +1,34 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import { listarDisciplinas } from "../services/disciplinaService";
+import { listarDisciplinas, excluirDisciplina } from "../services/disciplinaService";
 import "./Alunos.css";
 
 export default function Disciplinas() {
   const [disciplinas, setDisciplinas] = useState([]);
   const [busca, setBusca] = useState("");
   const [carregando, setCarregando] = useState(true);
+  const navigate = useNavigate();
+
+  async function carregar() {
+    setCarregando(true);
+    try {
+      const dados = await listarDisciplinas();
+      setDisciplinas(dados);
+    } finally {
+      setCarregando(false);
+    }
+  }
 
   useEffect(() => {
-    listarDisciplinas()
-      .then(setDisciplinas)
-      .finally(() => setCarregando(false));
+    carregar();
   }, []);
+
+  async function handleExcluir(id) {
+    if (!confirm("Tem certeza que deseja excluir esta disciplina?")) return;
+    await excluirDisciplina(id);
+    carregar();
+  }
 
   const filtradas = disciplinas.filter((d) =>
     d.nome.toLowerCase().includes(busca.toLowerCase())
@@ -23,10 +39,13 @@ export default function Disciplinas() {
       <div className="alunos-topo">
         <input
           className="alunos-busca"
-          placeholder="Buscar por nome ou código..."
+          placeholder="Buscar por nome..."
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
+        <button className="alunos-novo" onClick={() => navigate("/disciplinas/novo")}>
+          + Nova Disciplina
+        </button>
       </div>
 
       <div className="alunos-tabela-container">
@@ -39,6 +58,7 @@ export default function Disciplinas() {
                 <th>Nome</th>
                 <th>Código</th>
                 <th>Professor</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -47,6 +67,14 @@ export default function Disciplinas() {
                   <td>{d.nome}</td>
                   <td>{d.codigo}</td>
                   <td>{d.nomeProfessor}</td>
+                  <td className="alunos-acoes">
+                    <button onClick={() => navigate(`/disciplinas/${d.id}/editar`)}>
+                      Editar
+                    </button>
+                    <button className="excluir" onClick={() => handleExcluir(d.id)}>
+                      Excluir
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

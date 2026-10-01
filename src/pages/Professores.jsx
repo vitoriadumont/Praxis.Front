@@ -1,18 +1,34 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
-import { listarProfessores } from "../services/professorService";
+import { listarProfessores, excluirProfessor } from "../services/professorService";
 import "./Alunos.css";
 
 export default function Professores() {
   const [professores, setProfessores] = useState([]);
   const [busca, setBusca] = useState("");
   const [carregando, setCarregando] = useState(true);
+  const navigate = useNavigate();
+
+  async function carregar() {
+    setCarregando(true);
+    try {
+      const dados = await listarProfessores();
+      setProfessores(dados);
+    } finally {
+      setCarregando(false);
+    }
+  }
 
   useEffect(() => {
-    listarProfessores()
-      .then(setProfessores)
-      .finally(() => setCarregando(false));
+    carregar();
   }, []);
+
+  async function handleExcluir(id) {
+    if (!confirm("Tem certeza que deseja excluir este professor?")) return;
+    await excluirProfessor(id);
+    carregar();
+  }
 
   const filtrados = professores.filter((p) =>
     p.nome.toLowerCase().includes(busca.toLowerCase())
@@ -27,6 +43,9 @@ export default function Professores() {
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
+        <button className="alunos-novo" onClick={() => navigate("/professores/novo")}>
+          + Novo Professor
+        </button>
       </div>
 
       <div className="alunos-tabela-container">
@@ -39,6 +58,7 @@ export default function Professores() {
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Departamento</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -47,6 +67,14 @@ export default function Professores() {
                   <td>{p.nome}</td>
                   <td>{p.email}</td>
                   <td>{p.departamento}</td>
+                  <td className="alunos-acoes">
+                    <button onClick={() => navigate(`/professores/${p.id}/editar`)}>
+                      Editar
+                    </button>
+                    <button className="excluir" onClick={() => handleExcluir(p.id)}>
+                      Excluir
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

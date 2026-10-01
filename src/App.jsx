@@ -7,6 +7,9 @@ import Alunos from "./pages/Alunos";
 import AlunoForm from "./pages/AlunoForm";
 import Professores from "./pages/Professores";
 import Disciplinas from "./pages/Disciplinas";
+import ProfessorForm from "./pages/ProfessorForm";
+import DisciplinaForm from "./pages/DisciplinaForm";
+
 
 function App() {
   return (
@@ -49,6 +52,10 @@ function App() {
           <Route path="*" element={<Navigate to="/login" replace />} />
           <Route path="/professores" element={<RotaProtegida><Professores /></RotaProtegida>} />
           <Route path="/disciplinas" element={<RotaProtegida><Disciplinas /></RotaProtegida>} />
+          <Route path="/professores/novo" element={<RotaProtegida><ProfessorForm /></RotaProtegida>} />
+          <Route path="/professores/:id/editar" element={<RotaProtegida><ProfessorForm /></RotaProtegida>} />
+          <Route path="/disciplinas/novo" element={<RotaProtegida><DisciplinaForm /></RotaProtegida>} />
+          <Route path="/disciplinas/:id/editar" element={<RotaProtegida><DisciplinaForm /></RotaProtegida>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

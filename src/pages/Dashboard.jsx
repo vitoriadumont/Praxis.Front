@@ -34,7 +34,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Layout titulo="Dashboard" subtitulo="2024 — Semestre 1">
+    <Layout titulo="Dashboard" subtitulo="2026 — Semestre 2">
       {carregando ? (
         <p>Carregando...</p>
       ) : (
